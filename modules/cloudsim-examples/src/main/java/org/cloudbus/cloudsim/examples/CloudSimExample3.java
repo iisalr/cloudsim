@@ -12,8 +12,10 @@ package org.cloudbus.cloudsim.examples;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.CloudletSchedulerTimeShared;
@@ -131,8 +133,15 @@ public class CloudSimExample3 {
 
 			//bind the cloudlets to the vms. This way, the broker
 			// will submit the bound cloudlets only to the specific VM
-			broker.bindCloudletToVm(cloudlet1.getCloudletId(),vm1.getId());
-			broker.bindCloudletToVm(cloudlet2.getCloudletId(),vm2.getId());
+			//broker.bindCloudletToVm(cloudlet1.getCloudletId(),vm1.getId());
+			//broker.bindCloudletToVm(cloudlet2.getCloudletId(),vm2.getId());
+
+           //Hashmap se relaciona con Cloudlets con VMs luego agregue las asignaciones al map y se usa el forEach con relaciones lambda para procesar cada par :)
+			Map<Cloudlet, Vm> assignments = new HashMap<>();
+			assignments.put(cloudlet1, vm1);
+			assignments.put(cloudlet2, vm2);
+			assignments.forEach((cloudlet, vm) -> 
+    		broker.bindCloudletToVm(cloudlet.getCloudletId(), vm.getId()));
 
 			// Sixth step: Starts the simulation
 			CloudSim.startSimulation();

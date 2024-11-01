@@ -51,6 +51,8 @@ public class CloudSimExample1 {
 	public static void main(String[] args) {
 		Log.println("Starting CloudSimExample1...");
 
+
+
 		try {
 			// First step: Initialize the CloudSim package. It should be called before creating any entities.
 			int num_user = 1; // number of cloud users
